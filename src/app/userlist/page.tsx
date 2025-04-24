@@ -13,7 +13,6 @@ export default function UserListPage() {
     return <div>
         <h1>user list</h1>    
         
-        {data.email}
         </div>
     
 
