@@ -39,6 +39,7 @@ export default function NavBar() {
         <Link href="/">Home</Link>
         <Link href="/signup">회원가입</Link>
         <Link href="/login">로그인</Link>
+        <Link href="/socialLogin">소셜로그인</Link>
         <Link href="/posts">게시판</Link>
         <Link href="/profile">프로필</Link>
         <Link href="/test">테스트</Link>

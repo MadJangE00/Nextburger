@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -36,4 +37,5 @@ export default function LoginPage() {
       <pre>{token}</pre>
     </div>
   );
-}
+}  
+
