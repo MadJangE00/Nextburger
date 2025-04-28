@@ -13,6 +13,7 @@ export default function GenerateImagePage() {
   const [error, setError] = useState<string | null>(null)
 
   const handleGenerate = async () => {
+    console.log('이미지 생성 ㄱㄱ싱')
     if (!prompt.trim()) {
       setError('프롬프트를 입력하세요')
       return

@@ -62,7 +62,7 @@ export default function ProfilePage() {
       <h1>👤 내 프로필</h1>
       <p><strong>이메일:</strong> {user?.email}</p>
       <p><strong>UID:</strong> {user?.id}</p>
-      <input value={nickname} onChange={(e) => setNickname(e.target.value)} />
+      <input value={nickname} placeholder='nick name' onChange={(e) => setNickname(e.target.value)} />
       <button onClick={handleSave}>저장</button>
       <p>{message}</p>
       <button onClick={handleLogout} style={{ marginTop: 16 }}>
