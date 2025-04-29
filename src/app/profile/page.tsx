@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
+import VideoLogTable from '@/components/VideoLogTable';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -10,6 +11,8 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [nickname, setNickname] = useState('');
   const [message, setMessage] = useState('');
+  const [videos, setVideos] = useState<any[]>([]); // ✅ 영상 기록 상태 추가
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.replace('/login');
@@ -27,12 +30,24 @@ export default function ProfilePage() {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
       setLoading(false);
+
+      // ✅ 영상 기록 가져오기
+      const { data: videoData, error: videoError } = await supabase
+        .from('user_videos')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('uploaded_at', { ascending: false });
+
+      if (videoError) {
+        console.error('영상 기록 조회 실패:', videoError.message);
+      } else {
+        setVideos(videoData || []);
+      }
     };
 
     getSession();
   }, [router]);
 
-    
   useEffect(() => {
     (async () => {
       const session = (await supabase.auth.getSession()).data.session;
@@ -65,12 +80,14 @@ export default function ProfilePage() {
       <input value={nickname} placeholder='nick name' onChange={(e) => setNickname(e.target.value)} />
       <button onClick={handleSave}>저장</button>
       <p>{message}</p>
+
       <button onClick={handleLogout} style={{ marginTop: 16 }}>
-  로그아웃
-</button>
+        로그아웃
+      </button>
 
+      {/* ✅ 영상 기록 테이블 표시 */}
+      <h2 style={{ marginTop: 32 }}>🎬 영상 작업 기록</h2>
+      <VideoLogTable videos={videos} />
     </div>
-
-    
   );
 }
