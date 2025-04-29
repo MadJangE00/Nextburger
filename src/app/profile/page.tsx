@@ -35,7 +35,7 @@ export default function ProfilePage() {
       const { data: videoData, error: videoError } = await supabase
         .from('user_videos')
         .select('*')
-        .eq('user_id', user.id)
+        .eq('user_id', user?.id)
         .order('uploaded_at', { ascending: false });
 
       if (videoError) {
