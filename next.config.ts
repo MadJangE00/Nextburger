@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
+// next.config.ts
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:8000/:path*', // FastAPI 서버 주소
+      },
+    ];
+  },
 };
 
 export default nextConfig;
