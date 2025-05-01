@@ -30,7 +30,10 @@ export default function UploadVideoClient() {
 
     const { data, error } = await supabase.storage
       .from('videos')
-      .upload(path, file);
+      .upload(path, file, {
+        contentType: 'video/mp4',
+        upsert: true,
+      });
 
     if (error) {
       setMessage(`❌ 업로드 실패: ${error.message}`);
@@ -39,6 +42,7 @@ export default function UploadVideoClient() {
     }
 
     const publicUrl = supabase.storage.from('videos').getPublicUrl(path).data.publicUrl;
+    console.log('🎬 저장된 Public URL:', publicUrl);
 
     // DB 기록을 위한 API 호출
     const insertRes = await fetch('/api/user_videos/insert', {
