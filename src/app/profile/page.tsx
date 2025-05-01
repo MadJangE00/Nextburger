@@ -13,6 +13,7 @@ export default function ProfilePage() {
   const [message, setMessage] = useState('');
   const [videos, setVideos] = useState<any[]>([]);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -30,6 +31,7 @@ export default function ProfilePage() {
 
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
+      setAccessToken(session.access_token);
       setLoading(false);
     };
 
@@ -81,6 +83,8 @@ export default function ProfilePage() {
       <h1>👤 내 프로필</h1>
       <p><strong>이메일:</strong> {user?.email}</p>
       <p><strong>UID:</strong> {user?.id}</p>
+      <p><strong>Access Token:</strong> {accessToken}</p>
+
       <input value={nickname} placeholder='nick name' onChange={(e) => setNickname(e.target.value)} />
       <button onClick={handleSave}>저장</button>
       <p>{message}</p>
