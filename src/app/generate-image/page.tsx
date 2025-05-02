@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 export default function GenerateImagePage() {
   const [prompt, setPrompt] = useState('')
-  const [apiUrl, setApiUrl] = useState('http://127.0.0.1:8000/generate-image/')
+  const [apiUrl, setApiUrl] = useState('http://192.168.0.80/generate-image/')
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)

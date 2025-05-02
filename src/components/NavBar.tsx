@@ -37,10 +37,11 @@ export default function NavBar() {
     }}>
       <div style={{ display: 'flex', gap: '16px' }}>
         <Link href="/">Home</Link>
+        <Link href="/signup">회원 가입</Link>
         <Link href="/posts">게시판</Link>
         <Link href="/profile">프로필</Link>
         <Link href="/test">테스트</Link>
-        {/* <Link href="/generate-image">이미지 생성기</Link> */}
+        <Link href="/generate-image">이미지 생성기</Link>
         <Link href="/video">비디오 촬영</Link>
 
       </div>
